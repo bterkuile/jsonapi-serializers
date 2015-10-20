@@ -151,20 +151,12 @@ describe JSONAPI::Serializer do
           },
           'relationships' => {
             'author' => {
-              'links' => {
-                'self' => '/posts/1/relationships/author',
-                'related' => '/posts/1/author',
-              },
               # Spec: Resource linkage MUST be represented as one of the following:
               # - null for empty to-one relationships.
               # http://jsonapi.org/format/#document-structure-resource-relationships
               'data' => nil,
             },
             'long-comments' => {
-              'links' => {
-                'self' => '/posts/1/relationships/long-comments',
-                'related' => '/posts/1/long-comments',
-              },
               'data' => [],
             },
           },
@@ -185,10 +177,6 @@ describe JSONAPI::Serializer do
           },
           'relationships' => {
             'author' => {
-              'links' => {
-                'self' => '/posts/1/relationships/author',
-                'related' => '/posts/1/author',
-              },
               # Spec: Resource linkage MUST be represented as one of the following:
               # - a 'linkage object' (defined below) for non-empty to-one relationships.
               # http://jsonapi.org/format/#document-structure-resource-relationships
@@ -198,10 +186,6 @@ describe JSONAPI::Serializer do
               },
             },
             'long-comments' => {
-              'links' => {
-                'self' => '/posts/1/relationships/long-comments',
-                'related' => '/posts/1/long-comments',
-              },
               'data' => [],
             },
           },
@@ -222,17 +206,9 @@ describe JSONAPI::Serializer do
           },
           'relationships' => {
             'author' => {
-              'links' => {
-                'self' => '/posts/1/relationships/author',
-                'related' => '/posts/1/author',
-              },
               'data' => nil,
             },
             'long-comments' => {
-              'links' => {
-                'self' => '/posts/1/relationships/long-comments',
-                'related' => '/posts/1/long-comments',
-              },
               # Spec: Resource linkage MUST be represented as one of the following:
               # - an empty array ([]) for empty to-many relationships.
               # http://jsonapi.org/format/#document-structure-resource-relationships
@@ -257,17 +233,9 @@ describe JSONAPI::Serializer do
           },
           'relationships' => {
             'author' => {
-              'links' => {
-                'self' => '/posts/1/relationships/author',
-                'related' => '/posts/1/author',
-              },
               'data' => nil,
             },
             'long-comments' => {
-              'links' => {
-                'self' => '/posts/1/relationships/long-comments',
-                'related' => '/posts/1/long-comments',
-              },
               # Spec: Resource linkage MUST be represented as one of the following:
               # - an array of linkage objects for non-empty to-many relationships.
               # http://jsonapi.org/format/#document-structure-resource-relationships

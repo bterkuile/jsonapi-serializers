@@ -117,11 +117,13 @@ module JSONAPI
           formatted_attribute_name = format_name(attribute_name)
 
           data[formatted_attribute_name] = {}
-          links_self = relationship_self_link(attribute_name)
-          links_related = relationship_related_link(attribute_name)
-          data[formatted_attribute_name]['links'] = {} if links_self || links_related
-          data[formatted_attribute_name]['links']['self'] = links_self if links_self
-          data[formatted_attribute_name]['links']['related'] = links_related if links_related
+          unless direct_children_includes.include?(attribute_name)
+            links_self = relationship_self_link(attribute_name)
+            links_related = relationship_related_link(attribute_name)
+            data[formatted_attribute_name]['links'] = {} if links_self || links_related
+            data[formatted_attribute_name]['links']['self'] = links_self if links_self
+            data[formatted_attribute_name]['links']['related'] = links_related if links_related
+          end
 
           if related_object_serializer.nil? or related_object_serializer.id.nil?
             # Spec: Resource linkage MUST be represented as one of the following:
@@ -143,12 +145,6 @@ module JSONAPI
           formatted_attribute_name = format_name(attribute_name)
 
           data[formatted_attribute_name] = {}
-          links_self = relationship_self_link(attribute_name)
-          links_related = relationship_related_link(attribute_name)
-          data[formatted_attribute_name]['links'] = {} if links_self || links_related
-          data[formatted_attribute_name]['links']['self'] = links_self if links_self
-          data[formatted_attribute_name]['links']['related'] = links_related if links_related
-
           # Spec: Resource linkage MUST be represented as one of the following:
           # - an empty array ([]) for empty to-many relationships.
           # - an array of linkage objects for non-empty to-many relationships.
@@ -162,6 +158,12 @@ module JSONAPI
                 'id' => related_object_serializer.id.to_s,
               }
             end
+          else
+            links_self = relationship_self_link(attribute_name)
+            links_related = relationship_related_link(attribute_name)
+            data[formatted_attribute_name]['links'] = {} if links_self || links_related
+            data[formatted_attribute_name]['links']['self'] = links_self if links_self
+            data[formatted_attribute_name]['links']['related'] = links_related if links_related
           end
         end
         data
