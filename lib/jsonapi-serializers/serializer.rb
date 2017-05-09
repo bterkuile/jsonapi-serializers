@@ -125,7 +125,7 @@ module JSONAPI
             data[formatted_attribute_name]['links']['related'] = links_related if links_related
           end
 
-          if related_object_serializer.nil? or related_object_serializer.id.nil?
+          if related_object_serializer.nil? or related_object_serializer.id.nil? or related_object_serializer.id == ''
             # Spec: Resource linkage MUST be represented as one of the following:
             # - null for empty to-one relationships.
             # http://jsonapi.org/format/#document-structure-resource-relationships
